@@ -1,13 +1,22 @@
 package com.bytrees;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.alibaba.fastjson.JSON;
 
 @RestController
 public class GoodsController {
     @RequestMapping(value = "/goods/list", method = RequestMethod.GET, produces={"application/json;charset=UTF-8"})
     public String getList() {
-        return "[{\"id\": 1, \"name\": \"测试商品\"}, {\"id\": 2, \"name\": \"测试商品2\"}, {\"id\": 3, \"name\": \"蓝月亮洗衣液\"}]";
+    	List<Goods> goodsList = new ArrayList<Goods>();
+    	goodsList.add(new Goods(1, "测试商品"));
+    	goodsList.add(new Goods(2, "测试商品2"));
+    	goodsList.add(new Goods(3, "蓝月亮洗衣液"));
+        return JSON.toJSONString(goodsList);
     }
 }
