@@ -1,4 +1,4 @@
-package com.bytrees;
+package com.bytrees.dao;
 
 public class Goods {
     private int id;
