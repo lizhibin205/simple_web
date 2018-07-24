@@ -14,7 +14,7 @@ public class ResponseJson<T> {
     public int getResponse() {
     	return response;
     }
-    public String message() {
+    public String getMessage() {
     	return message;
     }
     public T getData() {
