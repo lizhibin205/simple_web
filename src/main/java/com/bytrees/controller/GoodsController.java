@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-//import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,8 +16,8 @@ import com.bytrees.utils.ResponseJson;
 
 @RestController
 public class GoodsController {
-	//@Autowired
-	//private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
     @RequestMapping(value = "/goods/simpleList", method = RequestMethod.GET, produces={"application/json;charset=UTF-8"})
     public String getSimpleList() {
@@ -30,11 +29,11 @@ public class GoodsController {
     }
 
     @RequestMapping(value = "/goods/list", method = RequestMethod.GET, produces={"application/json;charset=UTF-8"})
-    public String getList(JdbcTemplate jdbcTemplate) {
+    public String getList() {
     	try {
     		List<Map<String, Object>> list =jdbcTemplate.queryForList("select * from goods");
-    		return JSON.toJSONString(new ResponseJson<List<Map<String, Object>>>(200, "", list));
-    	} catch (DataAccessException ex) {
+    		return JSON.toJSONString(new ResponseJson<List<Map<String, Object>>>(200, "success", list));
+    	} catch (Exception ex) {
     		return JSON.toJSONString(new ResponseJson<Object>(500, ex.getMessage(), null));
     	}
     }

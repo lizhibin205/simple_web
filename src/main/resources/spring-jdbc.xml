@@ -21,7 +21,7 @@
   
     <!-- 使用 spring jdbc 模板-->  
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
-        <constructor-arg ref="dataSource" />  
+        <constructor-arg name="dataSource" ref="dataSource" />  
     </bean>  
     <!-- <bean id="simpleJdbcInsert" class="org.springframework.jdbc.core.simple.SimpleJdbcInsert">  
         <constructor-arg ref="dataSource" />  

@@ -27,7 +27,7 @@
         <property name="password" value="" />  
   
         <!-- 初始化连接大小 -->  
-        <property name="initialSize" value="0" />  
+        <property name="initialSize" value="10" />  
         <!-- 连接池最大使用连接数量 -->  
         <property name="maxActive" value="1500" />  
         <!-- 连接池最小空闲 -->  
