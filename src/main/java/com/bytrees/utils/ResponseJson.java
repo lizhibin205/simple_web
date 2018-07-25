@@ -15,11 +15,7 @@ public class ResponseJson<T> {
     	return response;
     }
     public String getMessage() {
-    	if (message == null) {
-    		return "no message";
-    	} else {
-    		return message;
-    	}
+    	return message;
     }
     public T getData() {
     	return data;
