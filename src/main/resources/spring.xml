@@ -21,4 +21,5 @@
 
     <import resource="spring-jdbc.xml" /> 
     <import resource="spring-druid.xml" />
+    <import resource="spring-service.xml" />
 </beans>  
