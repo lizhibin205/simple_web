@@ -3,7 +3,9 @@ package com.bytrees.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,9 +50,9 @@ public class GoodsController {
     }
 
     @RequestMapping(value = "/goods/{goodsId}", method = RequestMethod.PUT, produces={"application/json;charset=UTF-8"})
-    public String update(@PathVariable(value="goodsId") int goodsId, HttpServletRequest request) {
+    public String update(@PathVariable(value="goodsId") int goodsId, @RequestBody MultiValueMap<String,String> requestBody) {
     	try {
-    		String goodsName = request.getParameter("name");
+    		String goodsName = requestBody.getFirst("name");
     		if (goodsName.length() == 0) {
     			throw new Exception("Goods name can't be null");
     		}
