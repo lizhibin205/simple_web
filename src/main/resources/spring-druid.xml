@@ -22,9 +22,9 @@
     <!-- 配置druid数据源 -->  
     <bean id="dataSource" name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">  
         <!-- 数据库连接基础信息 -->  
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/my_shop?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull" />  
-        <property name="username" value="root" />  
-        <property name="password" value="" />  
+        <property name="url" value="${spring.datasource.druid.url}" />  
+        <property name="username" value="${spring.datasource.druid.username}" />  
+        <property name="password" value="${spring.datasource.druid.password}" />  
   
         <!-- 初始化连接大小 -->  
         <property name="initialSize" value="10" />  
@@ -40,7 +40,7 @@
             name="maxPoolPreparedStatementPerConnectionSize" value="33" /> -->  
   
         <!-- 验证数据库连接有效性，要求查询语句 -->  
-        <property name="validationQuery" value="select 1" />  
+        <property name="validationQuery" value="${spring.datasource.druid.validation-query}" />  
         <!-- 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。 -->  
         <property name="testWhileIdle" value="true" />  
         <!-- 申请连接时执行validationQuery检测连接是否有效，配置true会降低性能。 -->  
