@@ -8,7 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.bytrees.bean.Goods;
+import com.bytrees.entity.Goods;
 
 public class GoodsDao {
 	@Autowired

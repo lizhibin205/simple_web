@@ -1,4 +1,4 @@
-package com.bytrees.bean;
+package com.bytrees.entity;
 
 public class Goods {
     private Integer id;

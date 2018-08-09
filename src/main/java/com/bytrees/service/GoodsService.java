@@ -2,8 +2,8 @@ package com.bytrees.service;
 
 import java.util.List;
 
-import com.bytrees.bean.Goods;
 import com.bytrees.dao.GoodsDao;
+import com.bytrees.entity.Goods;
 
 public class GoodsService {
 	private GoodsDao goodsDao;

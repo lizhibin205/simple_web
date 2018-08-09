@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
-import com.bytrees.bean.Goods;
+import com.bytrees.entity.Goods;
 import com.bytrees.service.GoodsService;
 import com.bytrees.utils.ResponseJson;
 
