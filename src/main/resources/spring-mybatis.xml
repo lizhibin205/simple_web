@@ -17,10 +17,13 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd  
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd  
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd  
-        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
-    <bean id="goodsDao" class="com.bytrees.dao.GoodsDao"></bean> 
-    <bean id="goodsService" class="com.bytrees.service.GoodsService">
-       <constructor-arg name="goodsDao" ref="goodsDao" />
-    </bean>
-    <bean id="userService" class="com.bytrees.service.UserService"></bean>    
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">   
+  
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	  <property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	  <property name="mapperInterface" value="com.bytrees.mapper.UserMapper" />
+	  <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
 </beans>
