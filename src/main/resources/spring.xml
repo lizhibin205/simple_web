@@ -23,4 +23,5 @@
     <import resource="spring-druid.xml" />
     <import resource="spring-mybatis.xml" />
     <import resource="spring-service.xml" />
+    <import resource="spring-security.xml" />
 </beans>  
