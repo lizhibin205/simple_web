@@ -1,6 +1,8 @@
 package com.bytrees.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
@@ -20,17 +22,14 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "/user/login", method = RequestMethod.POST, produces={"application/json;charset=UTF-8"})
-	public String userLogin(HttpServletRequest request) {
+	public String userLogin(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
+			//HttpSession sess = request.getSession();
 			//find user exists
-			User user = userService.getByUsername(request.getParameter("username"));
-			if (user == null) {
-				throw new Exception("login failed.");
-			}
-			String password = DigestUtils.md5DigestAsHex(request.getParameter("password").getBytes());
-			if (password.compareTo(user.getPassword()) != 0) {
-				throw new Exception("login failed.");
-			}
+			String token = userService.userLogin(username, password);
+			
 			//set login session
 			
 			//output

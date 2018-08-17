@@ -16,4 +16,12 @@ public class UserService {
 	public User getByUsername(String username) {
 		return userMapper.getByUsername(username);
 	}
+
+	public String userLogin(String username, String password) {
+		User user = getByUsername(username);
+		if (user == null) {
+			return null;
+		}
+		return "";
+	}
 }
