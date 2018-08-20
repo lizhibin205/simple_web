@@ -1,34 +1,19 @@
 package com.bytrees.service;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import com.bytrees.dao.GoodsDao;
 import com.bytrees.entity.Goods;
+import com.bytrees.mapper.GoodsMapper;
 
 public class GoodsService {
-	private GoodsDao goodsDao;
-
-	public GoodsService(GoodsDao goodsDao) {
-		this.goodsDao = goodsDao;
-	}
+    @Autowired
+    private GoodsMapper goodsMapper;
 
     public Goods get(int goodsId) {
-    	return goodsDao.get(goodsId);
+        return goodsMapper.get(goodsId);
     }
 
-    public List<Goods> getList(int offset, int limit) {
-    	return goodsDao.getList(offset, limit);
-    }
-
-    public boolean create(String name) {
-    	return goodsDao.create(name) == 1;
-    }
-
-    public boolean update(int goodsId, String name) {
-    	return goodsDao.update(goodsId, name) == 1;
-    }
-
-    public boolean delete(int goodsId) {
-    	return goodsDao.delete(goodsId) == 1;
+    public Goods getByName(String goodsName) {
+        return goodsMapper.getByName(goodsName);
     }
 }

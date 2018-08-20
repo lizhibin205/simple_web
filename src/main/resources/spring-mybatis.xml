@@ -26,4 +26,8 @@
 	  <property name="mapperInterface" value="com.bytrees.mapper.UserMapper" />
 	  <property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+	<bean id="goodsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <property name="mapperInterface" value="com.bytrees.mapper.GoodsMapper" />
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
 </beans>
