@@ -12,8 +12,4 @@ public class GoodsService {
     public Goods get(int goodsId) {
         return goodsMapper.get(goodsId);
     }
-
-    public Goods getByName(String goodsName) {
-        return goodsMapper.getByName(goodsName);
-    }
 }
