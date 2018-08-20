@@ -1,5 +1,7 @@
 package com.bytrees.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.bytrees.entity.Goods;
+import com.bytrees.entity.GoodsSearch;
 import com.bytrees.service.GoodsService;
 import com.bytrees.utils.ResponseJson;
 
@@ -27,6 +30,25 @@ public class GoodsController {
                 throw new Exception("Can't find goods(id=" + goodsId + ")");
             }
             return JSON.toJSONString(new ResponseJson<Goods>(200, "success", goods));
+        } catch (Exception ex) {
+            return JSON.toJSONString(new ResponseJson<Goods>(500, ex.getMessage(), null));
+        }
+    }
+
+    @RequestMapping(value = "/goods/search", method = RequestMethod.GET, produces={"application/json;charset=UTF-8"})
+    public String search(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String name = request.getParameter("name");
+            if (name.isEmpty()) {
+                throw new Exception("Search name can't be empty.");
+            }
+            GoodsSearch goodsSearch = new GoodsSearch(name, 50);
+            int lastId = Integer.parseInt(request.getParameter("last_id"));
+            if (lastId > 0) {
+                goodsSearch.setLastId(lastId);
+            }
+            List<Goods> goodsList = goodsService.search(goodsSearch);
+            return JSON.toJSONString(new ResponseJson<List<Goods>>(200, "success", goodsList));
         } catch (Exception ex) {
             return JSON.toJSONString(new ResponseJson<Goods>(500, ex.getMessage(), null));
         }
