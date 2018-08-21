@@ -17,6 +17,6 @@ public class GoodsService {
     }
 
     public List<Goods> search(GoodsSearch goodsSearch) {
-        return goodsMapper.search(goodsSearch.getName(), goodsSearch.getLimit(), goodsSearch.getLastId());
+        return goodsMapper.search(goodsSearch.getSearchNameList(), goodsSearch.getLimit(), goodsSearch.getLastId());
     }
 }

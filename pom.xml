@@ -135,6 +135,11 @@
         <artifactId>org.eclipse.persistence.jpa</artifactId>
         <version>2.6.0</version>
     </dependency>
+    <dependency>
+        <groupId>com.hankcs</groupId>
+        <artifactId>hanlp</artifactId>
+        <version>portable-1.6.7</version>
+    </dependency>
   </dependencies>
 
   <build>

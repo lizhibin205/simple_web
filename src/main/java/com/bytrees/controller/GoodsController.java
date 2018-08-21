@@ -16,6 +16,8 @@ import com.bytrees.entity.Goods;
 import com.bytrees.entity.GoodsSearch;
 import com.bytrees.service.GoodsService;
 import com.bytrees.utils.ResponseJson;
+import com.hankcs.hanlp.seg.common.Term;
+import com.hankcs.hanlp.tokenizer.SpeedTokenizer;
 
 @RestController
 public class GoodsController {
@@ -42,15 +44,26 @@ public class GoodsController {
             if (name.isEmpty()) {
                 throw new Exception("Search name can't be empty.");
             }
-            GoodsSearch goodsSearch = new GoodsSearch(name, 50);
+            GoodsSearch goodsSearch = new GoodsSearch();
             int lastId = Integer.parseInt(request.getParameter("last_id"));
             if (lastId > 0) {
                 goodsSearch.setLastId(lastId);
+            }
+            List<Term> words = SpeedTokenizer.segment(name);
+            for (Term term : words) {
+                goodsSearch.addName(term.word);
             }
             List<Goods> goodsList = goodsService.search(goodsSearch);
             return JSON.toJSONString(new ResponseJson<List<Goods>>(200, "success", goodsList));
         } catch (Exception ex) {
             return JSON.toJSONString(new ResponseJson<Goods>(500, ex.getMessage(), null));
         }
+    }
+
+    @RequestMapping(value = "/goods/hanlp", method = RequestMethod.GET, produces={"application/json;charset=UTF-8"})
+    public String hanlp(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("name");
+        List<Term> words = SpeedTokenizer.segment(name);
+        return words.get(0).word;
     }
 }
