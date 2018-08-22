@@ -1,5 +1,6 @@
 package com.bytrees.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,6 +50,7 @@ public class GoodsController {
             if (lastId > 0) {
                 goodsSearch.setLastId(lastId);
             }
+            //关键词搜索
             List<Term> words = SpeedTokenizer.segment(name);
             for (Term term : words) {
                 goodsSearch.addName(term.word);
@@ -64,6 +66,6 @@ public class GoodsController {
     public String hanlp(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("name");
         List<Term> words = SpeedTokenizer.segment(name);
-        return words.get(0).word;
+        return JSON.toJSONString(new ResponseJson<List<Term>>(200, "success", words));
     }
 }

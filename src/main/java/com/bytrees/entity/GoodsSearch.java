@@ -1,9 +1,10 @@
 package com.bytrees.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GoodsSearch {
-    private List<String> searchNameList;
+    private List<String> searchNameList = new ArrayList<String>();
     private int limit = 50;
     private int lastId = 0;
 
@@ -11,9 +12,6 @@ public class GoodsSearch {
         if (!searchNameList.contains(name)) {
             searchNameList.add(name);
         }
-    }
-    public void setSearchNameList(List<String> searchNameList) {
-        this.searchNameList = searchNameList;
     }
     public List<String> getSearchNameList() {
         return searchNameList;

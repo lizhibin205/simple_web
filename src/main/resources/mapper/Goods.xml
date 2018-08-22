@@ -8,10 +8,10 @@
      <select id="get" parameterType="int" resultType="com.bytrees.entity.Goods">
          select id,name from goods where id=#{goodsId} limit 1
      </select>
-     <select id="search">
+     <select id="search" resultType="com.bytrees.entity.Goods">
          select id,name from goods where id>#{lastId} and (
-         <foreach  item="name" collection="searchNameList" separator="or">
-         name like CONCAT('%',#{name},'%') 
+         <foreach  item="name" collection="searchNameList" separator="and">
+         name like '%${name}%'
          </foreach>
          )
          limit #{limit}
