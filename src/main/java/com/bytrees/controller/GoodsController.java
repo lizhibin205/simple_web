@@ -1,6 +1,5 @@
 package com.bytrees.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,6 +65,10 @@ public class GoodsController {
     public String hanlp(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("name");
         List<Term> words = SpeedTokenizer.segment(name);
-        return JSON.toJSONString(new ResponseJson<List<Term>>(200, "success", words));
+        StringBuilder sb = new StringBuilder();
+        for (Term term: words) {
+            sb.append("[" + term.word + "|" + term.nature + "]");
+        }
+        return JSON.toJSONString(new ResponseJson<List<Term>>(200, sb.toString(), words));
     }
 }
