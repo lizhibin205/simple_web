@@ -19,7 +19,7 @@
     <!-- 设置视图解析工具 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
         <!-- 设置文件前缀 -->
-        <property name="prefix" value="/WEB-INF/jsp/" />  
+        <property name="prefix" value="/WEB-INF/templates/" />  
         <!-- 设置文件后缀 -->
         <property name="suffix" value=".jsp" />  
     </bean> 
