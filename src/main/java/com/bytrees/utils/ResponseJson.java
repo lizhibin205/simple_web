@@ -1,18 +1,18 @@
 package com.bytrees.utils;
 
 public class ResponseJson<T> {
-    private int response;
+    private Integer code;
     private String message;
     private T data;
 
-    public ResponseJson(int response, String message, T data) {
-    	this.response = response;
+    public ResponseJson(Integer code, String message, T data) {
+    	this.code = code;
     	this.message = message;
     	this.data = data;
     }
 
-    public int getResponse() {
-    	return response;
+    public Integer getCode() {
+    	return code;
     }
     public String getMessage() {
     	return message;

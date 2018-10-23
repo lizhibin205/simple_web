@@ -2,18 +2,13 @@
 <!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<!-- namespace的值就是dao接口的完整路劲，就这个demo而言namespace 就是userDao.java的完整路劲 -->
+<!-- namespace的值就是dao接口的完整路劲，就这个demo而言namespace 就是com.bytrees.mapper.GoodsMapper的完整路劲 -->
 <mapper namespace="com.bytrees.mapper.GoodsMapper">
      <!-- 这里的id就是接口中方法的名称 -->
      <select id="get" parameterType="int" resultType="com.bytrees.entity.Goods">
-         select id,name from goods where id=#{goodsId} limit 1
+         select id,name,create_time,update_time from goods where id=#{goodsId} and is_deleted=0 limit 1
      </select>
-     <select id="search" resultType="com.bytrees.entity.Goods">
-         select id,name from goods where id>#{lastId} and (
-         <foreach  item="name" collection="searchNameList" separator="and">
-         name like '%${name}%'
-         </foreach>
-         )
-         limit #{limit}
-     </select>
+     <insert id="create" parameterType="com.bytrees.entity.Goods">
+         insert into goods(`name`,`create_time`) values(#{name}, #{createTime})
+     </insert>
 </mapper>
