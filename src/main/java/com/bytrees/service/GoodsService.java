@@ -1,9 +1,12 @@
 package com.bytrees.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.bytrees.entity.Goods;
 import com.bytrees.mapper.GoodsMapper;
 
+@Component
 public class GoodsService {
     @Autowired
     private GoodsMapper goodsMapper;
