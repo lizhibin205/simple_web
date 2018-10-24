@@ -1,22 +1,26 @@
 package com.bytrees.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.bytrees.entity.Goods;
-import com.bytrees.entity.GoodsSearch;
 import com.bytrees.mapper.GoodsMapper;
 
 public class GoodsService {
     @Autowired
     private GoodsMapper goodsMapper;
 
-    public Goods get(int goodsId) {
+    public Goods get(long goodsId) {
         return goodsMapper.get(goodsId);
     }
 
-    public List<Goods> search(GoodsSearch goodsSearch) {
-        return goodsMapper.search(goodsSearch.getSearchNameList(), goodsSearch.getLimit(), goodsSearch.getLastId());
+    public int create(Goods goods) {
+    	return goodsMapper.create(goods);
+    }
+    
+    public int modify(Goods goods) {
+    	return goodsMapper.modify(goods);
+    }
+
+    public int delete(long goodsId) {
+    	return goodsMapper.delete(goodsId);
     }
 }

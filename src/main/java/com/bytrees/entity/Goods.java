@@ -1,8 +1,12 @@
 package com.bytrees.entity;
 
+import java.sql.Timestamp;
+
 public class Goods {
     private Long id;
     private String name;
+    private Timestamp createTime;
+    private Timestamp updateTime;
 
     public Long getId() {
     	return id;
@@ -16,5 +20,19 @@ public class Goods {
     }
     public void setName(String name) {
     	this.name = name;
+    }
+
+    public Timestamp getCreateTime() {
+    	return createTime;
+    }
+    public void setCreateTime(Timestamp createTime) {
+    	this.createTime = createTime;
+    }
+
+    public Timestamp getUpdateTime() {
+    	return updateTime;
+    }
+    public void setUpdateTime(Timestamp updateTime) {
+    	this.updateTime = updateTime;
     }
 }
