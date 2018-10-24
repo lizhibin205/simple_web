@@ -8,11 +8,19 @@ public class GoodsService {
     @Autowired
     private GoodsMapper goodsMapper;
 
-    public Goods get(int goodsId) {
+    public Goods get(long goodsId) {
         return goodsMapper.get(goodsId);
     }
 
     public int create(Goods goods) {
     	return goodsMapper.create(goods);
+    }
+    
+    public int modify(Goods goods) {
+    	return goodsMapper.modify(goods);
+    }
+
+    public int delete(long goodsId) {
+    	return goodsMapper.delete(goodsId);
     }
 }
