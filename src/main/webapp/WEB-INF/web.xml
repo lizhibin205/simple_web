@@ -11,7 +11,10 @@
     <param-value>classpath*:spring.xml</param-value>  
   </context-param>
 
-  <!-- spring -->  
+  <!-- spring -->
+  <listener>  
+    <listener-class>com.bytrees.utils.PropertiesListener</listener-class>  
+  </listener>
   <listener>  
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
   </listener>  
@@ -37,18 +40,8 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
-  <!-- security 
-  <filter>  
-    <filter-name>springSecurityFilterChain</filter-name>  
-    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 
-  </filter>
-  <filter-mapping>  
-    <filter-name>springSecurityFilterChain</filter-name>  
-    <url-pattern>/*</url-pattern>  
-  </filter-mapping>
-   -->
-
   <!-- druid 监控 -->
+  <!-- 
   <servlet>  
     <servlet-name>druidStatView</servlet-name>  
     <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
@@ -73,6 +66,7 @@
     <filter-name>druidWebStatFilter</filter-name>
     <url-pattern>/druid/*</url-pattern>
   </filter-mapping>
+   -->
 
     <!-- 设置请求编码格式 -->  
     <filter>  

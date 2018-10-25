@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +25,8 @@ import com.bytrees.utils.ResponseJson;
 public class GoodsController {
     @Autowired
     private GoodsService goodsService;
+    
+    private static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
 
     @RequestMapping(value = "/{goodsId}", method = RequestMethod.GET, produces={"application/json;charset=UTF-8"})
     public String get(@PathVariable(value="goodsId") long  goodsId, HttpServletRequest request, HttpServletResponse response) {
@@ -35,6 +40,7 @@ public class GoodsController {
             }
             return JSON.toJSONString(new ResponseJson<Goods>(200, "success", goods));
         } catch (Exception ex) {
+        	logger.error(ex.getMessage());
             return JSON.toJSONString(new ResponseJson<Goods>(404, ex.getMessage(), null));
         }
     }
@@ -54,6 +60,7 @@ public class GoodsController {
     		}
             return JSON.toJSONString(new ResponseJson<Goods>(200, "success", null));
         } catch (Exception ex) {
+        	logger.error(ex.getMessage());
             return JSON.toJSONString(new ResponseJson<Goods>(500, ex.getMessage(), null));
         }
     }
@@ -76,6 +83,7 @@ public class GoodsController {
     		}
             return JSON.toJSONString(new ResponseJson<Goods>(200, "success", null));
         } catch (Exception ex) {
+        	logger.error(ex.getMessage());
             return JSON.toJSONString(new ResponseJson<Exception>(500, ex.getMessage(), null));
         }
     }
@@ -91,6 +99,7 @@ public class GoodsController {
     		}
             return JSON.toJSONString(new ResponseJson<Goods>(200, "success", null));
         } catch (Exception ex) {
+        	logger.error(ex.getMessage());
             return JSON.toJSONString(new ResponseJson<Exception>(500, ex.getMessage(), null));
         }
     }
