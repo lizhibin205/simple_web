@@ -19,11 +19,7 @@ public class UserService {
 		return userMapper.getByUsername(username);
 	}
 
-	public String userLogin(String username, String password) {
-		User user = getByUsername(username);
-		if (user == null) {
-			return null;
-		}
-		return "";
+	public int create(User user) {
+		return userMapper.create(user);
 	}
 }

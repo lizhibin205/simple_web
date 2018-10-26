@@ -1,13 +1,11 @@
 package com.bytrees.mapper;
 
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Param;
 
 import com.bytrees.entity.User;
 
 public interface UserMapper {
-	@Select("select id,username,password from users where id=#{userId}")
-    public User get(int userId);
-
-	@Select("select id,username,password from users where username=#{username}")
-	public User getByUsername(String username);
+    public User get(@Param("userId") long userId);
+	public User getByUsername(@Param("username") String username);
+	public int create(User user);
 }
