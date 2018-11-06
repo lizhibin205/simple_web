@@ -17,6 +17,13 @@ public class HelloController {
         return "hello";
     }
 
+    @RequestMapping(value = "/hello/error", method = RequestMethod.GET)
+    public String helloException() {
+    	int[] arr = {0};
+    	arr[1] = 3;//throw out bound exception
+    	return null;
+    }
+
     @RequestMapping(value = "/hello/redirect", method = RequestMethod.GET)
     public String redirect(HttpServletResponse response) {
     	try {
