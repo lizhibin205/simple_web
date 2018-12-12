@@ -13,7 +13,7 @@
 
   <!-- spring -->
   <listener>  
-    <listener-class>com.bytrees.utils.PropertiesListener</listener-class>  
+    <listener-class>com.bytrees.utils.Log4jListener</listener-class>  
   </listener>
   <listener>  
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
