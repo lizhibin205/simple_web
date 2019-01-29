@@ -8,12 +8,12 @@
   <!-- 加载配置文件 -->  
   <context-param>  
     <param-name>contextConfigLocation</param-name>  
-    <param-value>classpath*:spring.xml</param-value>  
+    <param-value>classpath:spring-web.xml</param-value>  
   </context-param>
 
   <!-- spring -->
   <listener>  
-    <listener-class>com.bytrees.utils.PropertiesListener</listener-class>  
+    <listener-class>com.bytrees.utils.Log4jListener</listener-class>  
   </listener>
   <listener>  
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  

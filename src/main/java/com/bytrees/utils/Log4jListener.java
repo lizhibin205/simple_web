@@ -3,8 +3,7 @@ package com.bytrees.utils;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-public class PropertiesListener implements ServletContextListener  {
-
+public class Log4jListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		// TODO Auto-generated method stub
@@ -19,5 +18,4 @@ public class PropertiesListener implements ServletContextListener  {
 		// TODO Auto-generated method stub
 		System.getProperties().remove("BYTREES_LOG4J_FILE");
 	}
-    
 }

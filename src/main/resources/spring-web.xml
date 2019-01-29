@@ -13,8 +13,16 @@
     <!-- 自动扫描 controller 包下的所有类 -->  
     <context:component-scan base-package="com.bytrees" />
     
-    <!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean -->
-    <mvc:annotation-driven />
+    <!-- 引入项目配置文件 -->  
+    <context:property-placeholder location="classpath:*.properties"/>
+
+    <!-- 默认的注解映射的支持 -->
+    <import resource="spring-jdbc.xml" /> 
+    <import resource="spring-druid.xml" />
+    <import resource="spring-mybatis.xml" />
+    <!--  
+    <import resource="spring-security.xml" />
+    -->
 
     <!-- 设置视图解析工具 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
@@ -23,4 +31,5 @@
         <!-- 设置文件后缀 -->
         <property name="suffix" value=".jsp" />  
     </bean> 
+    <mvc:annotation-driven />
 </beans>
