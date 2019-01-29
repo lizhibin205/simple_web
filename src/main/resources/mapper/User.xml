@@ -6,14 +6,14 @@
 <mapper namespace="com.bytrees.mapper.UserMapper">
      <!-- 这里的id就是接口中方法的名称 -->
      <select id="get" parameterType="long" resultType="com.bytrees.entity.User">
-         select id,username,password
+         select id,username,password,create_time as createTime,update_time as updateTime
          from users where id=#{userId} limit 1
      </select>
      <select id="getByUsername" resultType="com.bytrees.entity.User">
-         select id,username,password
+         select id,username,password,create_time as createTime,update_time as updateTime
          from users where username=#{username} limit 1
      </select>
-     <insert id="create">
+     <insert id="create" parameterType="com.bytrees.entity.User">
          insert into users(username,password,create_time)
          values(#{username},#{password},#{createTime})
      </insert>
