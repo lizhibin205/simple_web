@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Hello World</title>
+<title>Error</title>
 </head>
 <body>
    <h1>Error</h1>
-   <p>Uncaptured exception</p>
+   <p>Exception: ${exceptionMessage}</p>
 </body>
 </html>
