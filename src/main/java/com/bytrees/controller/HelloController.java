@@ -1,36 +1,25 @@
 package com.bytrees.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.ui.ModelMap;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HelloController {
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String hello(ModelMap modelMap) {
-    	//String
-    	String message = "hello, spring web!";
-        modelMap.addAttribute("message", message);
-        return "hello";
-    }
-
-    @RequestMapping(value = "/hello/error", method = RequestMethod.GET)
-    public String helloException() {
-    	int[] arr = {0};
-    	arr[1] = 3;//throw out bound exception
-    	return null;
+    public ModelAndView hello() {
+    	ModelAndView view = new ModelAndView("hello");
+    	view.addObject("message", "hello, spring web!");
+        return view;
     }
 
     @RequestMapping(value = "/hello/redirect", method = RequestMethod.GET)
-    public String redirect(HttpServletResponse response) {
-    	try {
-    		response.sendRedirect("/hello");
-    	} catch (Exception ex) {
-    		
-    	}
-    	return null;
+    public void redirect(HttpServletResponse response) throws IOException,IllegalStateException  {
+    	response.sendRedirect("/hello");
     }
 }
