@@ -1,106 +1,75 @@
 package com.bytrees.controller;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.MultiValueMap;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSON;
 import com.bytrees.entity.Goods;
 import com.bytrees.service.GoodsService;
 import com.bytrees.utils.ResponseJson;
+import com.bytrees.vo.GoodsVO;
 
 @RestController
-@RequestMapping(value = "/v1/goods")
+@RequestMapping(value = "/goods")
 public class GoodsController {
     @Autowired
     private GoodsService goodsService;
-    
+
     private static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
 
-    @RequestMapping(value = "/{goodsId}", method = RequestMethod.GET, produces={"application/json;charset=UTF-8"})
-    public String get(@PathVariable(value="goodsId") long  goodsId, HttpServletRequest request, HttpServletResponse response) {
-    	try {
-    		if (goodsId < 1) {
-    			throw new Exception("Goods id must greater than 0");
-    		}
-    		Goods goods = goodsService.get(goodsId);
-            if (goods == null) {
-                throw new Exception("Can't find goods(id=" + goodsId + ")");
-            }
-            return JSON.toJSONString(new ResponseJson<Goods>(200, "success", goods));
-        } catch (Exception ex) {
-        	logger.error(ex.getMessage());
-            return JSON.toJSONString(new ResponseJson<Goods>(404, ex.getMessage(), null));
-        }
+    @RequestMapping(value = "/{goodsId}", method = RequestMethod.GET)
+    public ResponseEntity<ResponseJson<GoodsVO>> get(@PathVariable(value="goodsId") long goodsId, HttpServletRequest request, HttpServletResponse response) {
+    	Goods goods = goodsService.get(goodsId);
+    	if (goods == null) {
+    		return new ResponseEntity<>(new ResponseJson<GoodsVO>(404, "goods not exists.", null), HttpStatus.OK);
+    	}
+    	GoodsVO goodsVO = new GoodsVO();
+    	BeanUtils.copyProperties(goods, goodsVO);
+        return new ResponseEntity<>(new ResponseJson<GoodsVO>(200, "success.", goodsVO), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, produces={"application/json;charset=UTF-8"})
-    public String create(HttpServletRequest request, HttpServletResponse response) {
-    	try {
-    		String goodsName = request.getParameter("name");
-    		if (goodsName == null || goodsName.length() == 0) {
-    			throw new Exception("Goods name can't be empty");
-    		}
-    		Goods goods = new Goods();	
-    		goods.setName(goodsName);
-    		goods.setCreateTime(new Timestamp(new Date().getTime()));
-    		if (goodsService.create(goods) == 0) {
-    			throw new Exception("Create goods failure");
-    		}
-            return JSON.toJSONString(new ResponseJson<Goods>(200, "success", null));
-        } catch (Exception ex) {
-        	logger.error(ex.getMessage());
-            return JSON.toJSONString(new ResponseJson<Goods>(500, ex.getMessage(), null));
-        }
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public ResponseEntity<ResponseJson<Object>> create(@RequestBody GoodsVO goodsVO) {
+    	Goods goods = new Goods();
+    	BeanUtils.copyProperties(goodsVO, goods);
+    	int result = goodsService.create(goods);
+    	if (result == 1) {
+    		return new ResponseEntity<>(new ResponseJson<Object>(200, "success.", null), HttpStatus.OK);
+    	} else {
+    		return new ResponseEntity<>(new ResponseJson<Object>(500, "create failure.", null), HttpStatus.OK);
+    	}
     }
 
-    @RequestMapping(value = "/{goodsId}", method = RequestMethod.PUT, produces={"application/json;charset=UTF-8"})
-    public String modify(@PathVariable(value="goodsId") long goodsId, @RequestBody MultiValueMap<String,String> requestBody) {
-    	try {
-    		if (goodsId < 1) {
-    			throw new Exception("Goods id must greater than 0");
-    		}
-    		String goodsName = requestBody.getFirst("name");
-    		if (goodsName == null || goodsName.length() == 0) {
-    			throw new Exception("Goods name can't be empty");
-    		}
-    		Goods goods = new Goods();
-    		goods.setId(goodsId);
-    		goods.setName(goodsName);
-    		if (goodsService.modify(goods) == 0) {
-    			throw new Exception("Modify goods failure");
-    		}
-            return JSON.toJSONString(new ResponseJson<Goods>(200, "success", null));
-        } catch (Exception ex) {
-        	logger.error(ex.getMessage());
-            return JSON.toJSONString(new ResponseJson<Exception>(500, ex.getMessage(), null));
-        }
+    @RequestMapping(value = "/{goodsId}/edit", method = RequestMethod.POST)
+    public ResponseEntity<ResponseJson<Object>> modify(@PathVariable(value="goodsId") long goodsId, @RequestBody GoodsVO goodsVO) {
+    	Goods goods = new Goods();
+    	BeanUtils.copyProperties(goodsVO, goods);
+    	int result = goodsService.modify(goods);
+    	if (result == 1) {
+    		return new ResponseEntity<>(new ResponseJson<Object>(200, "success.", null), HttpStatus.OK);
+    	} else {
+    		return new ResponseEntity<>(new ResponseJson<Object>(500, "edit failure.", null), HttpStatus.OK);
+    	}
     }
 
-    @RequestMapping(value = "/{goodsId}", method = RequestMethod.DELETE, produces={"application/json;charset=UTF-8"})
-    public String delete(@PathVariable(value="goodsId") long goodsId) {
-    	try {
-    		if (goodsId < 1) {
-    			throw new Exception("Goods id must greater than 0");
-    		}
-    		if (goodsService.delete(goodsId) == 0) {
-    			throw new Exception("Delete goods failure");
-    		}
-            return JSON.toJSONString(new ResponseJson<Goods>(200, "success", null));
-        } catch (Exception ex) {
-        	logger.error(ex.getMessage());
-            return JSON.toJSONString(new ResponseJson<Exception>(500, ex.getMessage(), null));
-        }
+    @RequestMapping(value = "/{goodsId}/delete", method = RequestMethod.POST)
+    public ResponseEntity<ResponseJson<Object>> delete(@PathVariable(value="goodsId") long goodsId) {
+    	int result = goodsService.delete(goodsId);
+    	if (result == 1) {
+    		return new ResponseEntity<>(new ResponseJson<Object>(200, "success.", null), HttpStatus.OK);
+    	} else {
+    		return new ResponseEntity<>(new ResponseJson<Object>(500, "delete failure.", null), HttpStatus.OK);
+    	}
     }
 }

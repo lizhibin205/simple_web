@@ -7,6 +7,7 @@ public class Goods {
     private String name;
     private Timestamp createTime;
     private Timestamp updateTime;
+    private Byte isDeleted;
 
     public Long getId() {
     	return id;
@@ -34,5 +35,12 @@ public class Goods {
     }
     public void setUpdateTime(Timestamp updateTime) {
     	this.updateTime = updateTime;
+    }
+
+    public Byte getIsDeleted() {
+    	return isDeleted;
+    }
+    public void setIsDeleted(Byte isDeleted) {
+    	this.isDeleted = isDeleted;
     }
 }

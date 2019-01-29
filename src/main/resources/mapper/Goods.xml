@@ -6,7 +6,7 @@
 <mapper namespace="com.bytrees.mapper.GoodsMapper">
      <!-- 这里的id就是接口中方法的名称 -->
      <select id="get" parameterType="long" resultType="com.bytrees.entity.Goods">
-         select id,name,create_time as createTime,update_time as updateTime
+         select id,name,create_time as createTime,update_time as updateTime,is_deleted as isDeleted
          from goods where id=#{goodsId} and is_deleted=0 limit 1
      </select>
      <insert id="create" parameterType="com.bytrees.entity.Goods">
