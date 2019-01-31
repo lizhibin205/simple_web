@@ -1,6 +1,6 @@
 # simple-web
 基于spring开发的webapp，整合常用的功能类库，开箱即用，让开发者专注于业务设计  
-备注：该项目已停止维护，请访问v2.0版本，v2.0版本特性
+备注：该项目已停止维护，请访问v2.0版本，v2.0版本特性：[simple_web_v2](https://github.com/lizhibin205/simple_web_v2)
 1. 使用gradle构建项目
 2. 使用了spring-boot
 3. 更好的模块划分，和开发调试模式
